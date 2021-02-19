@@ -14,7 +14,7 @@ public class App
 {
     public static void main( String[] args ) {
         port(getPort());
-        get("/consumer", (request, response) -> {
+        get("/operation", (request, response) -> {
             //System.out.println(request.queryParams("operation"));
             //System.out.println(request.queryParams("number"));
             //System.out.println(Double.parseDouble(request.queryParams("number")));

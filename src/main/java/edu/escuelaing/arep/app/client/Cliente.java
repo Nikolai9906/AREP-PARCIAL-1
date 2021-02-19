@@ -13,7 +13,7 @@ public class Cliente {
 	 */
 	public static void main(String[] args) {
 		try {
-			URL url = new URL("https://intense-badlands-44966.herokuapp.com/operation?operation=cos&number=15");
+			URL url = new URL("https://intense-badlands-44966.herokuapp.com/operation?operation=sin&number=15");
 			HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
 			conexion.setRequestMethod("GET");
 			conexion.setRequestProperty("Content-Type", "application/json");
