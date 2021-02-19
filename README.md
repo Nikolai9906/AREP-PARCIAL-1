@@ -27,7 +27,7 @@ Para generar javadoc de las pruebas: ```mvn javadoc:test-javadoc```
 **IMPORTANTE:** Para poder utilizar el aplicativo es necesario compilar primero el proyecto con **mvn package**.
 
 # Integracion Continua
-[![CircleCI](https://circleci.com/gh/Nikolai9906/AREP-LAB-2.svg?style=svg)](https://circleci.com/gh/Nikolai9906/AREP-LAB-2)
+[![CircleCI](https://circleci.com/gh/Nikolai9906/AREP-PARCIAL-1.svg?style=svg)](https://circleci.com/gh/Nikolai9906/AREP-PARCIAL-1)
 # Despliegue Heroku
 
 https://intense-badlands-44966.herokuapp.com/operation?operation=cos&number=15
