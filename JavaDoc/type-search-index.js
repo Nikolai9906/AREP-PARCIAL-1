@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"edu.escuelaing.arep.app","l":"App"},{"p":"edu.escuelaing.arep.app","l":"AppTest"},{"p":"edu.escuelaing.arep.app.operation","l":"Calculator"},{"p":"edu.escuelaing.arep.app.client","l":"Cliente"},{"p":"edu.escuelaing.arep.app.convertion","l":"ConvertJson"}]
