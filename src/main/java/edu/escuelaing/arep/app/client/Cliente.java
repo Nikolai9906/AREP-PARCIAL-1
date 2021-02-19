@@ -13,18 +13,19 @@ public class Cliente {
 	 */
 	public static void main(String[] args) {
 		try {
-			URL url = new URL("https://intense-badlands-44966.herokuapp.com/operation?operation=sin&number=15");
-			HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
-			conexion.setRequestMethod("GET");
-			conexion.setRequestProperty("Content-Type", "application/json");
-			conexion.setDoOutput(true);
-			conexion.setUseCaches(false);
+			URL url = new URL("https://intense-badlands-44966.herokuapp.com/operation?operation=cos&number=15");
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			connection.setRequestProperty("Content-Type", "application/json");
+			connection.setDoOutput(true);
+			connection.setUseCaches(false);
 
-			InputStream inconnection = conexion.getInputStream();
+			InputStream inConnection = connection.getInputStream();
 
-			BufferedReader rd = new BufferedReader(new InputStreamReader(inconnection));
+			BufferedReader rd = new BufferedReader(new InputStreamReader(inConnection));
 			StringBuilder res = new StringBuilder();
 			String linea ;
+
 			while ((linea = rd.readLine()) != null) {
 				res.append(linea);
 			}
@@ -33,7 +34,7 @@ public class Cliente {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.err.println("Ocurrio un error al intentar realizar la petici�n GET al servidor");
+			System.err.println("Ocurrio un error al intentar realizar la peticion del servidor");
 		}
 	}
 }

@@ -1,13 +1,17 @@
-# Taller Ejercicio Maven - GIT
+# PARCIAL - AREP - 1
 
-Este aplicativo calcula algunas medidas estadísticas de n números reales que se leen de un archivo, utilizando una lista encadenada básica propia creada en la aplicación.
+- Construir un servicio WEB (puede usar Spark o Sockets) que reciba un número y una cadena de tres caracteres. La cadena puede ser una de tres opciones: "cos", "sin", "tan". El servicio asume que el número que recibe está en radianes y retorna una estructura JSON con el valor de la función trigonométrica correspondiente.
+- Construya otro servicio Web (puede usar Spark o Sockets) que sea una fachada del servicios construido en el primer punto. Es decir, este servicio recibe los mismos parámetros y regresa el mismo resultado, pero para hacer el cálculo debe invocar via http al servicio web que se constuyó en el primer punto.
+- Su diseño debe soportar la composición de nuevas operaciones para modificar servicios existentes o componer nuevos servicios. Por ejemplo, piense que en el futuro podemos solicitar que se creen nuevos servicios sobre  el API web, es decir,  debe ser fácilmente extensible.
+- El diseño de los servicios WEB debe tener en cuenta buenas prácticas de diseño OO.
+- Despliegue los servicios en Heroku en dynos separados.
+- Construya un cliente JAVA para probar los dos servicios.
+- El cliente y los servicios debe entregarlos en dos proyectos estructurado con Maven. El primero con el servicio fachada y el cliente. Y el segundo con el servicio web concreto.
+- El cliente debe traer "quemada" en el código fuente la url de su aplicación desplegada en Heroku.
 
-
-## Diseño
-Los detalles del diseño, la arquitectura del programa, problema, definiciones y pruebas se pueden encontrar en el siguiente documento [Artículo Sobre el Diseño](Articulo_EjercicioHeroku.pdf).
 ## Prerequisitos
 
-Conocimientos básicos sobre estadística, media, mediana y desviación estándar.
+Conocimientos básicos sobre operaciones de tangente, coseno y seno
 
 ## Comandos
 Para compilar y correr las pruebas: ```mvn package```
@@ -24,12 +28,21 @@ Para generar javadoc de las pruebas: ```mvn javadoc:test-javadoc```
 
 # Integracion Continua
 [![CircleCI](https://circleci.com/gh/Nikolai9906/AREP-LAB-2.svg?style=svg)](https://circleci.com/gh/Nikolai9906/AREP-LAB-2)
-
 # Despliegue Heroku
 
-https://warm-inlet-01806.herokuapp.com
+https://intense-badlands-44966.herokuapp.com/operation?operation=cos&number=15
 
 ## Operaciones
+Para poder ejecutar alguna operacion se tendra que colocar la operacion y el valor como en el siguiente ejemplo:
+*https://intense-badlands-44966.herokuapp.com/operation?operation=cos&number=15* En este caso **operation** es la operacion y hace **cos**. Por otro lado **number** tiene el valor de **15**.
+```
+Coseno de 15
+- https://intense-badlands-44966.herokuapp.com/operation?operation=cos&number=15
+Seno de 15
+- https://intense-badlands-44966.herokuapp.com/operation?operation=sin&number=15
+Tangente de 15
+- https://intense-badlands-44966.herokuapp.com/operation?operation=tan&number=15
+```
 - Media: Calcula la media de una lista de n números ingresados por consola o por medio de un archivo.
 - Desviación estándar: Calcula la desviación estándar de una lista de n números ingresados por consola o por medio de un archivo.
 
@@ -55,58 +68,36 @@ Para instalar maven seguimos los siguientes pasos:
 7. Aceptamos los terminos y condiciones, y se instalará automáticamente.
 8. Reiniciamos eclipse y ya está instalado maven en eclipse.
 
-## Pruebas
-Para poder ejecutar sus pruebas siga los siguientes pasos:
-1. Cambie los valores de case1, case2, case3, ..., casen por los valores deseados o cree uno nuevo.
-2. Elija la prueba que desea y cambie el resultado por el esperado.
-3. Corra las pruebas y verifique que el resultado esperado es igual al valor dado por el programa.
 
-
-## Ejemplo de prueba de desviación estándar
+## Clase de Calculadora
 ```java
-  
-/**
-     * Prueba encargada de verificar que la lista conozca todos sus vecinos
-     */
-    @Test
-    public void testNeighbors() {
-        LinkedList linkedList = new LinkedList();
-        ArrayList<Double> testList = new ArrayList<Double>();
-        testList.add((double) 10);
-        testList.add((double) 20);
-        testList.add((double) 30);
-        testList.add((double) 40);
-        linkedList.addFirst((double) 40);
-        linkedList.addFirst((double) 30);
-        linkedList.addFirst((double) 20);
-        linkedList.addFirst((double) 10);
-        for (int i = 0; i < 4; i++) {
-            assertEquals(linkedList.getNodeValue(i), testList.get(i));
-        }
-    }
 
-/**
-     * Prueba encargada de evaluar la media con unos valores manualmente insertados
-     */
-    @Test
-    public void testMean() {
-        Stat data = new Stat();
-        data.addNumber(15.0);
-        data.addNumber(69.9);
-        data.addNumber(6.5);
-        data.addNumber(22.4);
-        data.addNumber(28.4);
-        data.addNumber(65.9);
-        data.addNumber(19.4);
-        data.addNumber(198.7);
-        data.addNumber(38.8);
-        data.addNumber(138.2);
-        try {
-            assertEquals(data.mean(), 60.32);
-        } catch (LinkedListException e) {
-            assertTrue(false);
-        }
-    }
+package edu.escuelaing.arep.app.operation;
+
+public class Calculator {
+   public double number;
+   public String operation;
+
+   public Calculator(double number, String operation){
+      this.number = number;
+      this.operation = operation;
+   }
+
+   public double getResultOperation(){
+      double res = 0;
+      //System.out.println(number + "operacion");
+      if(operation.equals("sin")){
+         res = Math.sin(number);
+      }else if (operation.equals("cos")){
+         res = Math.cos(number);
+      }else if (operation.equals("tan")){
+         res = Math.tan(number);
+      }
+      //System.out.println(res + "RES CALCUL");
+      return res;
+   }
+
+}
 ```
 
 ## ¿Cómo usar el aplicativo?
@@ -132,8 +123,10 @@ Si queremos ejecutar las pruebas y ver que todo está perfecto, utilizamos el co
 ## Construido
 [IntelliJ IDEA](https://www.jetbrains.com/es-es/idea/) Editor de JAVA donde se puede compilar el proyecto.
 
+[Spark](https://sparkjava.com) Framework Spark
+
 ## Autor
-Steven Nikolai Bermudez Vega - Trabajo Programación AREP 01/28/2021
+Steven Nikolai Bermudez Vega - Parcial de Programacion AREP 02/19/2021
 
 ## Licencia
 Este programa es de uso libre, puede ser usado por cualquier persona.
